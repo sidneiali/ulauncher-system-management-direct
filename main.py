@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 class SystemManagementDirect(Extension):
   def __init__(self):
-    logger.info('Loading Gnome Settings Extension')
+    logger.info('Carregando Extensão de configurações do Gnome')
     super(SystemManagementDirect, self).__init__()
     self.subscribe(KeywordQueryEvent, KeywordQueryEventListener())
 
@@ -25,13 +25,13 @@ class KeywordQueryEventListener(EventListener):
         return HideWindowAction()
 
   def on_match(self, id):
-    if id == 'lock-screen':
+    if id == 'bloquear tela':
       subprocess.Popen(['loginctl', 'lock-session'])
-    if id == 'suspend':
+    if id == 'suspender':
       subprocess.Popen(['systemctl', 'suspend', '-i'])
-    if id == 'shutdown':
+    if id == 'desligar':
       subprocess.Popen(['systemctl', 'poweroff', '-i'])
-    if id == 'restart':
+    if id == 'reiniciar':
       subprocess.Popen(['systemctl', 'reboot', '-i'])
 
 SystemManagementDirect().run()
